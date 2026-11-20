@@ -3,5 +3,5 @@ function [bboxes,scores,labels] = DetectObject(detector, img)
 %   Detailed explanation goes here
     tic;
     [bboxes, scores, labels] = detect(detector, img, ExecutionEnvironment="cpu");
-    fprintf("yolo: %.2f seconds\n", toc(t));
+    fprintf("yolo: %.2f seconds\n", toc);
 end
