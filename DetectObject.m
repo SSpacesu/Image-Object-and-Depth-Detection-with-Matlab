@@ -1,5 +1,7 @@
 function [bboxes,scores,labels] = DetectObject(detector, img)
 %DETECTOBJECT Summary of this function goes here
 %   Detailed explanation goes here
-    [bboxes, scores, labels] = detect(detector, img);
+    tic;
+    [bboxes, scores, labels] = detect(detector, img, ExecutionEnvironment="cpu");
+    fprintf("yolo: %.2f seconds\n", toc(t));
 end
