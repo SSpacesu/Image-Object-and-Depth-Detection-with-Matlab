@@ -1,7 +1,5 @@
 function depthMap = depthMap(model, img)
-   
-    dpro.py.torch.cuda.empty_cache();
-    tic;
-    depthMap = estimateDepth(model, img, ExecutionEnvironment="gpu");
-    fprintf("Depth Pro: %.2f seconds\n", toc);
+    t = tic;
+    depthMap = double(model.predict(im2uint8(img)));
+    fprintf("Depth Pro FP16: %.2f seconds\n", toc(t));
 end
