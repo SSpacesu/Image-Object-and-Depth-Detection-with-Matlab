@@ -12,8 +12,12 @@ function depthMap = depthMap(model, img)
 
     img_in = (img_in - meanRGB) ./ stdRGB;
 
-    % Convert into GPU backed dlarray so that predict knows to use GPU.
-    final_in = gpuArray(dlarray(img_in, "SSCB"));
+    % Convert into GPU backed dlarray (if GPU is available) so that predict knows to use GPU.
+    if canUseGPU()
+        final_in = gpuArray(dlarray(img_in, "SSCB"));
+    else
+        final_in = dlarray(img_in, "SSCB");
+    end
 
     %Use the model to get heatmap, this returns a dlarray.
     resArray = predict(model, final_in);
